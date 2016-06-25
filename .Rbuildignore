@@ -1,0 +1,7 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.tiff$
+^\.png$
+^\.xlsx$
+^excel_datasets$
+^Thumbs.db$
