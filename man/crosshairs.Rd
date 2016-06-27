@@ -11,23 +11,30 @@ crosshairs(x, y, xse, yse, x_lab = NULL, y_lab = NULL, main_lab = NULL,
   annotate_pos = NULL, grid_dense = FALSE, bxplts = TRUE)
 }
 \arguments{
-\item{x}{Effect sizes that will be used in x axis}
+\item{x}{Numeric vector of effect sizes that will be used in x axis.}
 
-\item{y}{Effect sizes that will be used in y axis}
+\item{y}{Numeric vector of effect sizes that will be used in y axis.}
 
-\item{xse}{Standard errors of effect sizes that is used in x axis}
+\item{xse}{Numeric vector standard errors of effect sizes that is used
+in x axis.}
 
-\item{yse}{Standard errors of the effect sizes that is used
+\item{yse}{Numeric vector standard errors of the effect sizes that is used
 in y axis}
 
-\item{x_lab}{Title of the x-axis}
+\item{x_lab}{Title of the x-axis.}
 
-\item{y_lab}{Title of the y-axis}
+\item{y_lab}{Title of the y-axis.}
 
 \item{main_lab}{Main label of the cross-hairs plot.}
 
 \item{confint}{Confidence interval that is used to determine
 length of the whiskers.}
+
+\item{mdrtr}{Whether there is a moderator variable?}
+
+\item{mdrtr_lab}{Label of the moderator variable.}
+
+\item{mdrtr_lab_pos}{Determine the positon of the moderator labels.}
 
 \item{lab_size}{Size of the axis titles.}
 
@@ -45,12 +52,6 @@ of the annotation.}
 will be used.}
 
 \item{bxplts}{Swithes boxplots on or off.}
-
-\item{modrtr}{Whether there is a moderator variable?}
-
-\item{modrtr_lab}{Label of the moderator variable.}
-
-\item{modrtr_lab_pos}{Determine the positon of the moderator labels.}
 }
 \description{
 When given effect sizes and standard errors, creates cross-hairs plots.

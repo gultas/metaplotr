@@ -5,16 +5,17 @@
 #'\code{crosshairs}'s basic output is a bitmat file that contains cross-hairs
 #'plot of given dependent effect sizes.
 #'
-#'@param x Effect sizes that will be used in x axis
-#'@param y Effect sizes that will be used in y axis
-#'@param xse Standard errors of effect sizes that is used in x axis
-#'@param yse Standard errors of the effect sizes that is used
+#'@param x Numeric vector of effect sizes that will be used in x axis.
+#'@param y Numeric vector of effect sizes that will be used in y axis.
+#'@param xse Numeric vector standard errors of effect sizes that is used
+#'       in x axis.
+#'@param yse Numeric vector standard errors of the effect sizes that is used
 #'       in y axis
-#'@param x_lab Title of the x-axis
-#'@param y_lab Title of the y-axis
-#'@param modrtr Whether there is a moderator variable?
-#'@param modrtr_lab Label of the moderator variable.
-#'@param modrtr_lab_pos Determine the positon of the moderator labels.
+#'@param x_lab Title of the x-axis.
+#'@param y_lab Title of the y-axis.
+#'@param mdrtr Whether there is a moderator variable?
+#'@param mdrtr_lab Label of the moderator variable.
+#'@param mdrtr_lab_pos Determine the positon of the moderator labels.
 #'@param lab_size Size of the axis titles.
 #'@param confint Confidence interval that is used to determine
 #'       length of the whiskers.
