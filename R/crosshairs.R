@@ -253,7 +253,7 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
 
   if (!is.null(mdrtr)) {
     main.plot <- main.plot +
-    ggplot2::geom_point(ggplot2::aes(shape = mod, colour = mod),
+    ggplot2::geom_point(ggplot2::aes(shape = mdrtr, colour = mdrtr),
                size = ggplot2::rel(pnt_size)) +
     ggplot2::scale_color_discrete(
       name = mdrtr_lab,
