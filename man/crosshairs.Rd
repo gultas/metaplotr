@@ -6,10 +6,9 @@
 \title{Creates a Cross-hairs Plot.}
 \usage{
 crosshairs(x, y, xse, yse, x_lab = NULL, y_lab = NULL, main_lab = NULL,
-  confint = 0.95, mod = NULL, mod_lab = NULL, mod_lab_pos = NULL,
-  lab_size = 14, pnt_size = 3, file_name = NULL, whis_on = TRUE,
-  annotate = NULL, annotate_pos = NULL, grid_dense = FALSE,
-  bxplts = TRUE, file_dim = NULL)
+  confint = 0.95, mdrtr = NULL, mdrtr_lab = NULL, mdrtr_lab_pos = NULL,
+  lab_size = 14, pnt_size = 3, whis_on = TRUE, annotate = FALSE,
+  annotate_pos = NULL, grid_dense = FALSE, bxplts = TRUE)
 }
 \arguments{
 \item{x}{Effect sizes that will be used in x axis}
@@ -30,18 +29,9 @@ in y axis}
 \item{confint}{Confidence interval that is used to determine
 length of the whiskers.}
 
-\item{mod}{Whether there is a moderator variable?}
-
-\item{mod_lab}{Label of the moderator variable.}
-
-\item{mod_lab_pos}{Determine the positon of the moderator labels.}
-
 \item{lab_size}{Size of the axis titles.}
 
 \item{pnt_size}{Determines the size of point in the plot.}
-
-\item{file_name}{Default name of the resulting bitmap file (e.g.,
-CrosshairsOutputFile.png, CrosshairsOuputFile.tiff, etc)}
 
 \item{whis_on}{Whiskers on or off?}
 
@@ -56,12 +46,11 @@ will be used.}
 
 \item{bxplts}{Swithes boxplots on or off.}
 
-\item{file_dim}{An integer vector of length two which is indicating
-dimensions of resulting tiff file.}
-}
-\value{
-Creates a \code{.tiff} file in the current working
-       directory that you can find with \code{\link[base]{getwd}}.
+\item{modrtr}{Whether there is a moderator variable?}
+
+\item{modrtr_lab}{Label of the moderator variable.}
+
+\item{modrtr_lab_pos}{Determine the positon of the moderator labels.}
 }
 \description{
 When given effect sizes and standard errors, creates cross-hairs plots.
@@ -87,8 +76,7 @@ attach(FergusonBrannick2012)
 # You can check out help file of the \\code{crosshairs} function.
 help(crosshairs)
 
-# Basic usage of the \\code{crosshairs} function. You should see a \\code{tiff}
-file in your current workind directory after running this command.
+# Basic usage of the \\code{crosshairs} function.
 crosshairs(pub_z, dis_z, pub_z_se, dis_z_se)
 
 # whis_on option opens and closes whiskers.
@@ -99,30 +87,18 @@ crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, confint = .95)
 crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, confint = .7)
 crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, confint = .3)
 
-# Name of the resulting \\code{tiff} file can be changed.
-crosshairs(pub_z, dis_z, pub_z_se, dis_z_se,
-file_name = 'A_Different_Name')
-
 # Main and axes labels can be changed.
 crosshairs(pub_z, dis_z, pub_z_se, dis_z_se,
-file_name = 'A_Different_Main_Label',
 main_lab = 'Different Main Label', x_lab = 'Different X',
 y_lab = 'Different Y')
 
 # Annotated correlation and meand values can be added to the graph.
-crosshairs(pub_z, dis_z, pub_z_se, dis_z_se,
-file_name = 'Annotated_Graph', annotate = TRUE,
+crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, annotate = TRUE,
 main_lab = 'Annotated Graph')
 
 # Boxplots can be hidden.
-crosshairs(pub_z, dis_z, pub_z_se, dis_z_se,
-file_name = 'Hidden_Boxplots', main_lab = 'No Boxplots',
+crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, main_lab = 'No Boxplots',
 bxplts = FALSE)
-
-# Dimensions of the resulting bitmap file can be changed.
-crosshairs(pub_z, dis_z, pub_z_se, dis_z_se,
-file_name = 'Smaller_Bitmap_Dimensions', main_lab = 'Smaller Plot',
-bxplts = FALSE, file_dim = c(600, 600))
 }
 
 }

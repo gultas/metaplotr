@@ -12,9 +12,9 @@
 #'       in y axis
 #'@param x_lab Title of the x-axis
 #'@param y_lab Title of the y-axis
-#'@param mod Whether there is a moderator variable?
-#'@param mod_lab Label of the moderator variable.
-#'@param mod_lab_pos Determine the positon of the moderator labels.
+#'@param modrtr Whether there is a moderator variable?
+#'@param modrtr_lab Label of the moderator variable.
+#'@param modrtr_lab_pos Determine the positon of the moderator labels.
 #'@param lab_size Size of the axis titles.
 #'@param confint Confidence interval that is used to determine
 #'       length of the whiskers.
@@ -29,8 +29,7 @@
 #'       will be used.
 #'@param bxplts Swithes boxplots on or off.
 #'
-#'@return Creates a \code{.tiff} file in the current working
-#'        directory that you can find with \code{\link[base]{getwd}}.
+#'@return NULL
 #'
 #'@aliases cross-hairs
 #'
@@ -51,8 +50,7 @@
 #'# You can check out help file of the \code{crosshairs} function.
 #'help(crosshairs)
 #'
-#'# Basic usage of the \code{crosshairs} function. You should see a \code{tiff}
-#'file in your current workind directory after running this command.
+#'# Basic usage of the \code{crosshairs} function.
 #'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se)
 #'
 #'# whis_on option opens and closes whiskers.
@@ -63,39 +61,28 @@
 #'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, confint = .7)
 #'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, confint = .3)
 #'
-#'# Name of the resulting \code{tiff} file can be changed.
-#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se,
-#'file_name = 'A_Different_Name')
-#'
 #'# Main and axes labels can be changed.
 #'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se,
-#'file_name = 'A_Different_Main_Label',
 #'main_lab = 'Different Main Label', x_lab = 'Different X',
 #'y_lab = 'Different Y')
 #'
 #'# Annotated correlation and meand values can be added to the graph.
-#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se,
-#'file_name = 'Annotated_Graph', annotate = TRUE,
+#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, annotate = TRUE,
 #'main_lab = 'Annotated Graph')
 #'
 #'# Boxplots can be hidden.
-#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se,
-#'file_name = 'Hidden_Boxplots', main_lab = 'No Boxplots',
-#'bxplts = FALSE)
-#'
-#'# Dimensions of the resulting bitmap file can be changed.
-#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, main_lab = 'Smaller Plot',
+#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, main_lab = 'No Boxplots',
 #'bxplts = FALSE)
 #'}
 #'
 #'@export
 crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
-                       main_lab = NULL, confint = 0.95, mod = NULL,
-                       mod_lab = NULL, mod_lab_pos = NULL,
+                       main_lab = NULL, confint = 0.95, mdrtr = NULL,
+                       mdrtr_lab = NULL, mdrtr_lab_pos = NULL,
                        lab_size = 14, pnt_size = 3,
                        whis_on = TRUE, annotate = FALSE,
                        annotate_pos = NULL, grid_dense = FALSE,
-                       bxplts = TRUE, file_dim = NULL) {
+                       bxplts = TRUE) {
 
   # Defining default values
   if (is.null(x_lab)) {
@@ -110,15 +97,23 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
     main_lab <- 'Main Title of the Plot'
   }
 
-  if (!is.null(mod)) {
-    if (!is.factor(mod)) {
+  # When a moderator variable is specified
+  if (!is.null(mdrtr)) {
+    if (!is.factor(mdrtr)) {
       # A factor is required as a moderator
-      mod <- as.factor(mod)
+      mdrtr <- as.factor(mdrtr)
     }
-    mod_xpos <- 0.2
-    mod_ypos <- 0.9
-    legend.pst <- c(mod_xpos, mod_ypos)
-    mod_lab <- 'Mod Label'
+    # Determines moderator label position
+    if (is.null(mdrtr_lab_pos)) {
+      modrtr_xpos <- 0.2
+      modrtr_ypos <- 0.9
+    }
+    # Moderator legend position vector
+    legend_pst <- c(modrtr_xpos, modrtr_ypos)
+
+    if (is.null(mdrtr_lab)) {
+      mdrtr_lab <- 'Mod Label'
+    }
   }
 
   # Assign formals to previous variables. To be cleaned later.
@@ -141,11 +136,11 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
       xll = xll,
       xul = xul,
       yul = yul,
-      yll = yll
+      yll = yll,
+      mod = mdrtr
     )
-    moderator.lab <- mod_lab
-    mdr.split <- strsplit(moderator.lab, ' ')
-    moderator.lab <- paste(mdr.split[[1]], collapse = '\n')
+    mdrtr_split <- strsplit(mdrtr_lab, ' ')
+    mdrtr_lab <- paste(mdrtr_split[[1]], collapse = '\n')
   } else {
     graph.data <- data.frame(
       x = x,
@@ -255,17 +250,17 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
                  color = 'firebrick')
   }
 
-  if (!is.null(mod)) {
+  if (!is.null(mdrtr)) {
     main.plot <- main.plot +
     ggplot2::geom_point(ggplot2::aes(shape = mod, colour = mod),
                size = ggplot2::rel(pnt_size)) +
     ggplot2::scale_color_discrete(
-      name = moderator.lab,
+      name = mdrtr_lab,
       breaks = levels(graph.data$mod),
       labels = levels(graph.data$mod)
     ) +
     ggplot2::scale_shape_discrete(
-      name = moderator.lab,
+      name = mdrtr_lab,
       breaks = levels(graph.data$mod),
       labels = levels(graph.data$mod)
     )
@@ -303,10 +298,10 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
     )
 
   # Adding moderator label to the graph if there is a moderator.
-  if (!is.null(mod)) {
+  if (!is.null(mdrtr)) {
     main.plot <- main.plot +
     ggplot2::theme(
-      legend.position = legend.pst,
+      legend.position = legend_pst,
       legend.justification = c(0.5, 0.5),
       panel.grid.minor = ggplot2::element_blank(),
       axis.title = ggplot2::element_text(size = lab_size)
