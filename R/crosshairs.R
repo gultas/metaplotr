@@ -20,8 +20,6 @@
 #'       length of the whiskers.
 #'@param main_lab Main label of the cross-hairs plot.
 #'@param pnt_size Determines the size of point in the plot.
-#'@param file_name Default name of the resulting bitmap file (e.g.,
-#'       CrosshairsOutputFile.png, CrosshairsOuputFile.tiff, etc)
 #'@param whis_on Whiskers on or off?
 #'@param annotate If true, mean effect size and correlation between
 #'       effect sizes will be printed within the graph.
@@ -30,8 +28,6 @@
 #'@param grid_dense When changed to FALSE, a default denser gridlines
 #'       will be used.
 #'@param bxplts Swithes boxplots on or off.
-#'@param file_dim An integer vector of length two which is indicating
-#'       dimensions of resulting tiff file.
 #'
 #'@return Creates a \code{.tiff} file in the current working
 #'        directory that you can find with \code{\link[base]{getwd}}.
@@ -88,9 +84,8 @@
 #'bxplts = FALSE)
 #'
 #'# Dimensions of the resulting bitmap file can be changed.
-#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se,
-#'file_name = 'Smaller_Bitmap_Dimensions', main_lab = 'Smaller Plot',
-#'bxplts = FALSE, file_dim = c(600, 600))
+#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, main_lab = 'Smaller Plot',
+#'bxplts = FALSE)
 #'}
 #'
 #'@export
@@ -98,13 +93,16 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
                        main_lab = NULL, confint = 0.95, mod = NULL,
                        mod_lab = NULL, mod_lab_pos = NULL,
                        lab_size = 14, pnt_size = 3,
-                       whis_on = TRUE, annotate = NULL,
+                       whis_on = TRUE, annotate = FALSE,
                        annotate_pos = NULL, grid_dense = FALSE,
                        bxplts = TRUE, file_dim = NULL) {
 
   # Defining default values
   if (is.null(x_lab)) {
     x_lab <- 'X Axis Title'
+  }
+
+  if (is.null(y_lab)) {
     y_lab <- 'Y Axis Title'
   }
 
@@ -117,37 +115,15 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
       # A factor is required as a moderator
       mod <- as.factor(mod)
     }
-    mod_xpos <- 0.5
-    mod_ypos <- 0.5
+    mod_xpos <- 0.2
+    mod_ypos <- 0.9
     legend.pst <- c(mod_xpos, mod_ypos)
     mod_lab <- 'Mod Label'
-
-    # if (is.null(mod_lab) && is.null(mod_lab_pos)) {
-    #   mod_lab <- 'Mod. Label'
-    #   mod_xpos <- 0.2
-    #   mod_ypos <- 0.9
-    # } else if (is.null(mod_lab) && !is.null(mod_lab_pos)) {
-    #   mod_lab <- 'Mod. Label'
-    #   mod_xpos <- mod_lab_pos[1]
-    #   mod_ypos <- mod_lab_pos[2]
-    # } else if (!is.null(mod_lab) && is.null(mod_lab_pos)) {
-    #   mod_xpos <- 0.2
-    #   mod_ypos <- 0.9
-    # } else {
-    #   mod_lab <- mod_lab
-    #   mod_xpos <- mod_lab_pos[1]
-    #   mod_ypos <- mod_lab_pos[2]
-    # }
   }
 
-  # Set Variables
+  # Assign formals to previous variables. To be cleaned later.
   se.x <- xse
   se.y <- yse
-
-  # Calculating annotated values added to the graphs.
-  xy.correlation <- round(stats::cor(x, y), 2)
-  x.mean <- round(mean(x), 2)
-  y.mean <- round(mean(y), 2)
 
   # Calculating upper and lower limits of effect sizes for whiskers.
   xll <- x - stats::qnorm(1 - (1 - confint) / 2) * se.x
@@ -396,7 +372,10 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
   }
 
   # Append annotated values to the graphs.
-  if (!is.null(annotate)) {
+  if (annotate) {
+    xy.correlation <- round(stats::cor(x, y), 2)
+    x.mean <- round(mean(x), 2)
+    y.mean <- round(mean(y), 2)
     ann.xy.corr <- paste('r =', xy.correlation, ' ')
     ann.x.mean <- paste('x M =', x.mean, ' ')
     ann.y.mean <- paste('y M =', y.mean, ' ')
