@@ -128,7 +128,7 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
   yul <- y + stats::qnorm(1 - (1 - confint) / 2) * se.y
 
   # Creating data frame that will be used by ggplot2 package.
-  if (!is.null(mod)) {
+  if (!is.null(mdrtr)) {
     graph.data <- data.frame(
       x = x,
       se.x = se.x,
