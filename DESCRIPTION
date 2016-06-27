@@ -6,6 +6,9 @@ Authors@R: c(
     person("Mehmet", "Gultas", , "mehmetgultas@gmail.com", c("aut", "cre")),
     person("Michael T.", "Brannick", , "mbrannick@usf.edu", "aut")
     )
+Author: Mehmet Gultas [aut, cre],
+  Michael T. Brannick [aut]
+Maintainer: Mehmet Gultas <mehmetgultas@gmail.com>
 Description: Creates crosshairs plots to summarize and analyse
     meta-analysis results. In due time this package will contain code
     that will create other kind of meta-analysis graphs.

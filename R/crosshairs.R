@@ -97,7 +97,7 @@
 crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
                        main_lab = NULL, confint = 0.95, mod = NULL,
                        mod_lab = NULL, mod_lab_pos = NULL,
-                       lab_size = 14, pnt_size = 3, file_name = NULL,
+                       lab_size = 14, pnt_size = 3,
                        whis_on = TRUE, annotate = NULL,
                        annotate_pos = NULL, grid_dense = FALSE,
                        bxplts = TRUE, file_dim = NULL) {
@@ -138,15 +138,6 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
     #   mod_xpos <- mod_lab_pos[1]
     #   mod_ypos <- mod_lab_pos[2]
     # }
-  }
-
-  if (is.null(file_name)) {
-    # Default output file name
-    file_name <- 'CrosshairsOutputFile'
-  }
-
-  if (is.null(file_dim)) {
-    file_dim <- c(800, 800)
   }
 
   # Set Variables
@@ -193,9 +184,9 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
   }
 
   # Creating a graphics device to print out the output.
-  grDevices::tiff(filename = paste(file_name, ".tiff", sep = ''),
-                  width = file_dim[1], height = file_dim[2],
-                  units = "px", pointsize = 12)
+  # grDevices::tiff(filename = paste(file_name, ".tiff", sep = ''),
+  #                 width = file_dim[1], height = file_dim[2],
+  #                 units = "px", pointsize = 12)
 
   # Finding maximum and minimum values of axes.
   find.min.max <- function(xll, xul, yll, yul) {
@@ -482,5 +473,5 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
   }
 
   # Turning off graphing device (i.e., tiff())
-  grDevices::graphics.off()
+  # grDevices::graphics.off()
 }
