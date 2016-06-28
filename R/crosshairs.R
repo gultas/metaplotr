@@ -35,7 +35,6 @@
 #'@aliases cross-hairs
 #'
 #'@examples
-#'\dontrun{
 #'# Load and attach metaplotr package to the Global Environment
 #'library(metaplotr)
 #'
@@ -43,38 +42,43 @@
 #'rm(list = ls())
 #'
 #'# Find out more about the data set from Ferguson and Brannick (2012)
-#'help("FergusonBrannick2012")
-#'
-#'attach data frame to working environment.
-#'attach(FergusonBrannick2012)
+#'# help("FergusonBrannick2012")
 #'
 #'# You can check out help file of the \code{crosshairs} function.
-#'help(crosshairs)
+#'# help(crosshairs)
 #'
 #'# Basic usage of the \code{crosshairs} function.
-#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se)
+#'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+#'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se)
 #'
 #'# whis_on option opens and closes whiskers.
-#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, whis_on = FALSE)
+#'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+#'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
+#'whis_on = FALSE)
 #'
 #'# confint option can control whiskers length.
-#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, confint = .95)
-#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, confint = .7)
-#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, confint = .3)
+#'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+#'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, confint = .95)
+#'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+#'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, confint = .7)
+#'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+#'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, confint = .2)
 #'
 #'# Main and axes labels can be changed.
-#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se,
-#'main_lab = 'Different Main Label', x_lab = 'Different X',
-#'y_lab = 'Different Y')
+#'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+#'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
+#'main_lab = 'Different Main Label', x_lab = 'Different X Label',
+#'y_lab = 'Different Y Label')
 #'
 #'# Annotated correlation and meand values can be added to the graph.
-#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, annotate = TRUE,
+#'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+#'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, annotate = TRUE,
 #'main_lab = 'Annotated Graph')
 #'
 #'# Boxplots can be hidden.
-#'crosshairs(pub_z, dis_z, pub_z_se, dis_z_se, main_lab = 'No Boxplots',
-#'bxplts = FALSE)
-#'}
+#'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+#'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
+#'main_lab = 'No Boxplots', bxplts = FALSE)
 #'
 #'@export
 crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
