@@ -8,7 +8,7 @@
 crosshairs(x, y, xse, yse, x_lab = NULL, y_lab = NULL, main_lab = NULL,
   confint = 0.95, mdrtr = NULL, mdrtr_lab = NULL, mdrtr_lab_pos = NULL,
   lab_size = 14, pnt_size = 3, whis_on = TRUE, annotate = FALSE,
-  annotate_pos = NULL, grid_dense = FALSE, bxplts = TRUE)
+  grid_dense = FALSE, bxplts = TRUE)
 }
 \arguments{
 \item{x}{Numeric vector of effect sizes that will be used in x axis.}
@@ -44,9 +44,6 @@ length of the whiskers.}
 
 \item{annotate}{If true, mean effect size and correlation between
 effect sizes will be printed within the graph.}
-
-\item{annotate_pos}{A value that determine horizontal position
-of the annotation.}
 
 \item{grid_dense}{When changed to FALSE, a default denser gridlines
 will be used.}
@@ -105,6 +102,24 @@ main_lab = 'Annotated Graph')
 crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
 main_lab = 'No Boxplots', bxplts = FALSE)
+
+# Moderator legend and annotations can be used simulaneously.
+crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
+mdrtr = FergusonBrannick2012$mod, annotate = TRUE,
+main_lab = 'Moderator Legend and Annotation')
+
+# Dot size can be changed.
+crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
+mdrtr = FergusonBrannick2012$mod, pnt_size = 6,
+main_lab = 'Bigger Dots')
+
+# Size of labels can be changed.
+crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
+mdrtr = FergusonBrannick2012$mod, lab_size = 20,
+main_lab = 'Label Size Change')
 
 }
 

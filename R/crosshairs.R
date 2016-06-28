@@ -24,8 +24,6 @@
 #'@param whis_on Whiskers on or off?
 #'@param annotate If true, mean effect size and correlation between
 #'       effect sizes will be printed within the graph.
-#'@param annotate_pos A value that determine horizontal position
-#'       of the annotation.
 #'@param grid_dense When changed to FALSE, a default denser gridlines
 #'       will be used.
 #'@param bxplts Swithes boxplots on or off.
@@ -80,16 +78,32 @@
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
 #'main_lab = 'No Boxplots', bxplts = FALSE)
 #'
+#'# Moderator legend and annotations can be used simulaneously.
+#'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+#'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
+#'mdrtr = FergusonBrannick2012$mod, annotate = TRUE,
+#'main_lab = 'Moderator Legend and Annotation')
+#'
+#'# Dot size can be changed.
+#'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+#'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
+#'mdrtr = FergusonBrannick2012$mod, pnt_size = 6,
+#'main_lab = 'Bigger Dots')
+#'
+#'# Size of labels can be changed.
+#'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+#'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
+#'mdrtr = FergusonBrannick2012$mod, lab_size = 20,
+#'main_lab = 'Label Size Change')
+#'
 #'@export
 crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
                        main_lab = NULL, confint = 0.95, mdrtr = NULL,
                        mdrtr_lab = NULL, mdrtr_lab_pos = NULL,
-                       lab_size = 14, pnt_size = 3,
-                       whis_on = TRUE, annotate = FALSE,
-                       annotate_pos = NULL, grid_dense = FALSE,
-                       bxplts = TRUE) {
+                       lab_size = 14, pnt_size = 3, whis_on = TRUE,
+                       annotate = FALSE, grid_dense = FALSE, bxplts = TRUE) {
 
-  # Defining default values
+  # Default axis and main labels of the graph.
   if (is.null(x_lab)) {
     x_lab <- 'X Axis Title'
   }
@@ -104,15 +118,18 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
 
   # When a moderator variable is specified
   if (!is.null(mdrtr)) {
+
     if (!is.factor(mdrtr)) {
       # A factor is required as a moderator
       mdrtr <- as.factor(mdrtr)
     }
+
     # Determines moderator label position
     if (is.null(mdrtr_lab_pos)) {
       modrtr_xpos <- 0.2
       modrtr_ypos <- 0.9
     }
+
     # Moderator legend position vector
     legend_pst <- c(modrtr_xpos, modrtr_ypos)
 
@@ -121,7 +138,7 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
     }
   }
 
-  # Assign formals to previous variables. To be cleaned later.
+  # Assign formals to previous variables. To be modified.
   se.x <- xse
   se.y <- yse
 
@@ -159,12 +176,12 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
     )
   }
 
-  # Creating a graphics device to print out the output.
+  # Creating bitmap file in working directory.
   # grDevices::tiff(filename = paste(file_name, ".tiff", sep = ''),
   #                 width = file_dim[1], height = file_dim[2],
   #                 units = "px", pointsize = 12)
 
-  # Finding maximum and minimum values of axes.
+  # Finding maximum and minimum values of axes for grid creating purpose.
   find.min.max <- function(xll, xul, yll, yul) {
     x.min <- min(xll, xul)
     x.min <- x.min - 0.1
@@ -187,6 +204,7 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
     return(x)
   }
 
+  # One of the plots is blank.
   blank.plot <- ggplot2::ggplot() +
     ggplot2::geom_blank(ggplot2::aes(1,1)) +
     ggplot2::theme(
@@ -277,7 +295,7 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
     main.plot
   }
 
-  ####################################################################
+  ##############################################################################
   main.plot <- main.plot +
     ggplot2::coord_cartesian(xlim = c(axis.scale[1], axis.scale[2]),
                              ylim = c(axis.scale[3], axis.scale[4]))
@@ -379,6 +397,8 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
     ann.xy.corr <- paste('r =', xy.correlation, ' ')
     ann.x.mean <- paste('x M =', x.mean, ' ')
     ann.y.mean <- paste('y M =', y.mean, ' ')
+    print('annotation x axis scale')
+    print(axis.scale[2])
 
     main.plot <- main.plot +
       ggplot2::annotate('text',
