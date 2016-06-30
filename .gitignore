@@ -1,16 +1,23 @@
-<<<<<<< HEAD
+# R history and user data
 .Rproj.user
-.Rhistory
 .RData
 .Ruserdata
+
+# Data sets
 excel_datasets/
 data/
+
+# Thumbs that create problem on windows
 Thumbs.db
+
+# Irrelevant code
 eski_code_crosshairs_05.R
+
+# packrat directories
 packrat/lib*/
 packrat/src/
 packrat/
-=======
+
 # History files
 .Rhistory
 .Rapp.history
