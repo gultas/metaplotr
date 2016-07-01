@@ -123,6 +123,10 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
     main_lab <- 'Main Title of the Plot'
   }
 
+  # Moderator label positions
+  mdrtr_lposx <- NULL
+  mdrtr_lposy <- NULL
+
   # When a moderator variable is specified
   if (!is.null(mdrtr)) {
 
@@ -131,7 +135,7 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
       mdrtr <- as.factor(mdrtr)
     }
 
-    if (length(mdrtr_lab_pos == 1)) {
+    if (length(mdrtr_lab_pos) == 1) {
       mdrtr_lab_pos[2] <- mdrtr_lab_pos[1]
     }
 
@@ -141,29 +145,32 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
     min_mdrtr_lab_pos_x <- 0.1
     min_mdrtr_lab_pos_y <- 0.1
 
+    # Defines x axis limits
     if (mdrtr_lab_pos[1] > max_mdrtr_lab_pos_x) {
-      mdrtr_lab_pos[1] <- max_mdrtr_lab_pos_x
+      mdrtr_lposx <- max_mdrtr_lab_pos_x
+    } else if (mdrtr_lab_pos[1] < min_mdrtr_lab_pos_x) {
+      mdrtr_lposx <- min_mdrtr_lab_pos_x
+    } else {
+      mdrtr_lposx <- mdrtr_lab_pos[1]
     }
 
+    # Defines y axis limits
     if (mdrtr_lab_pos[2] > max_mdrtr_lab_pos_y) {
-      mdrtr_lab_pos[2] <- max_mdrtr_lab_pos_y
+      mdrtr_lposy <- max_mdrtr_lab_pos_y
+    } else if (mdrtr_lab_pos[2] < min_mdrtr_lab_pos_y) {
+      mdrtr_lposy <- min_mdrtr_lab_pos_y
+    } else {
+      mdrtr_lposy <- mdrtr_lab_pos[2]
     }
 
-    if (mdrtr_lab_pos[1] < min_mdrtr_lab_pos_x) {
-      mdrtr_lab_pos[1] <- min_mdrtr_lab_pos_x
-    }
-
-    if (mdrtr_lab_pos[2] < min_mdrtr_lab_pos_y) {
-      mdrtr_lab_pos[2] <- min_mdrtr_lab_pos_y
-    }
-
-    # Moderator legend position vector
-    legend_pst <- c(mdrtr_lab_pos[1], mdrtr_lab_pos[2])
-
+    # Default moderator label
     if (is.null(mdrtr_lab)) {
       mdrtr_lab <- 'Mod Label'
     }
   }
+
+  # Moderator legend position vector
+  legend_pst <- c(mdrtr_lposx, mdrtr_lposy)
 
   # Assign formals to previous variables. To be modified.
   se.x <- xse
@@ -424,8 +431,6 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
     ann.xy.corr <- paste('r =', xy.correlation, ' ')
     ann.x.mean <- paste('x M =', x.mean, ' ')
     ann.y.mean <- paste('y M =', y.mean, ' ')
-    print('annotation x axis scale')
-    print(axis.scale[2])
 
     main.plot <- main.plot +
       ggplot2::annotate('text',

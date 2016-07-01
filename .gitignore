@@ -12,7 +12,6 @@ Thumbs.db
 eski_code_crosshairs_05.R
 # packrat directories
 packrat/lib*/
-packrat/src/
 packrat/
 # History files
 .Rhistory
