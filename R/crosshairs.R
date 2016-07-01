@@ -126,12 +126,20 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
 
     # Determines moderator label position
     if (is.null(mdrtr_lab_pos)) {
-      modrtr_xpos <- 0.2
-      modrtr_ypos <- 0.9
+      mdrtr_xpos <- 0.2
+      mdrtr_ypos <- 0.9
+    } else {
+      if (length(mdrt_lab_pos) == 1) {
+        mdrtr_xpos <- mdrtr_lab_pos[1]
+        mdrtr_ypos <- mdrtr_xpos
+      } else {
+        mdrtr_xpos <- mdrtr_lab_pos[1]
+        mdrtr_ypos <- mdrtr_lab_pos[2]
+      }
     }
 
     # Moderator legend position vector
-    legend_pst <- c(modrtr_xpos, modrtr_ypos)
+    legend_pst <- c(mdrtr_xpos, mdrtr_ypos)
 
     if (is.null(mdrtr_lab)) {
       mdrtr_lab <- 'Mod Label'
