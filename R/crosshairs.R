@@ -15,7 +15,8 @@
 #'@param y_lab Title of the y-axis.
 #'@param mdrtr Whether there is a moderator variable?
 #'@param mdrtr_lab Label of the moderator variable.
-#'@param mdrtr_lab_pos Determine the positon of the moderator labels.
+#'@param mdrtr_lab_pos Determine the positon of the moderator labels. Values
+#'       between 0.1 and 0.9 are allowed.
 #'@param lab_size Size of the axis titles.
 #'@param confint Confidence interval that is used to determine
 #'       length of the whiskers.
@@ -84,6 +85,12 @@
 #'mdrtr = FergusonBrannick2012$mod, annotate = TRUE,
 #'main_lab = 'Moderator Legend and Annotation')
 #'
+#'# Moderator legend position can be adjusted.
+#'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+#'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
+#'mdrtr = FergusonBrannick2012$mod, mdrtr_lab_pos = c(0.8, 0.8),
+#'main_lab = 'Moderator Legend Position Change')
+#'
 #'# Dot size can be changed.
 #'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
@@ -99,7 +106,7 @@
 #'@export
 crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
                        main_lab = NULL, confint = 0.95, mdrtr = NULL,
-                       mdrtr_lab = NULL, mdrtr_lab_pos = NULL,
+                       mdrtr_lab = NULL, mdrtr_lab_pos = c(0.2, 0.9),
                        lab_size = 14, pnt_size = 3, whis_on = TRUE,
                        annotate = FALSE, grid_dense = FALSE, bxplts = TRUE) {
 
@@ -124,22 +131,34 @@ crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
       mdrtr <- as.factor(mdrtr)
     }
 
-    # Determines moderator label position
-    if (is.null(mdrtr_lab_pos)) {
-      mdrtr_xpos <- 0.2
-      mdrtr_ypos <- 0.9
-    } else {
-      if (length(mdrt_lab_pos) == 1) {
-        mdrtr_xpos <- mdrtr_lab_pos[1]
-        mdrtr_ypos <- mdrtr_xpos
-      } else {
-        mdrtr_xpos <- mdrtr_lab_pos[1]
-        mdrtr_ypos <- mdrtr_lab_pos[2]
-      }
+    if (length(mdrtr_lab_pos == 1)) {
+      mdrtr_lab_pos[2] <- mdrtr_lab_pos[1]
+    }
+
+    # Maximum and minimum values of legend position on x and y axes
+    max_mdrtr_lab_pos_x <- 0.9
+    max_mdrtr_lab_pos_y <- 0.9
+    min_mdrtr_lab_pos_x <- 0.1
+    min_mdrtr_lab_pos_y <- 0.1
+
+    if (mdrtr_lab_pos[1] > max_mdrtr_lab_pos_x) {
+      mdrtr_lab_pos[1] <- max_mdrtr_lab_pos_x
+    }
+
+    if (mdrtr_lab_pos[2] > max_mdrtr_lab_pos_y) {
+      mdrtr_lab_pos[2] <- max_mdrtr_lab_pos_y
+    }
+
+    if (mdrtr_lab_pos[1] < min_mdrtr_lab_pos_x) {
+      mdrtr_lab_pos[1] <- min_mdrtr_lab_pos_x
+    }
+
+    if (mdrtr_lab_pos[2] < min_mdrtr_lab_pos_y) {
+      mdrtr_lab_pos[2] <- min_mdrtr_lab_pos_y
     }
 
     # Moderator legend position vector
-    legend_pst <- c(mdrtr_xpos, mdrtr_ypos)
+    legend_pst <- c(mdrtr_lab_pos[1], mdrtr_lab_pos[2])
 
     if (is.null(mdrtr_lab)) {
       mdrtr_lab <- 'Mod Label'

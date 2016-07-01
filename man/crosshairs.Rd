@@ -6,8 +6,8 @@
 \title{Creates a Cross-hairs Plot.}
 \usage{
 crosshairs(x, y, xse, yse, x_lab = NULL, y_lab = NULL, main_lab = NULL,
-  confint = 0.95, mdrtr = NULL, mdrtr_lab = NULL, mdrtr_lab_pos = NULL,
-  lab_size = 14, pnt_size = 3, whis_on = TRUE, annotate = FALSE,
+  confint = 0.95, mdrtr = NULL, mdrtr_lab = NULL, mdrtr_lab_pos = c(0.2,
+  0.9), lab_size = 14, pnt_size = 3, whis_on = TRUE, annotate = FALSE,
   grid_dense = FALSE, bxplts = TRUE)
 }
 \arguments{
@@ -34,7 +34,8 @@ length of the whiskers.}
 
 \item{mdrtr_lab}{Label of the moderator variable.}
 
-\item{mdrtr_lab_pos}{Determine the positon of the moderator labels.}
+\item{mdrtr_lab_pos}{Determine the positon of the moderator labels. Values
+between 0.1 and 0.9 are allowed.}
 
 \item{lab_size}{Size of the axis titles.}
 
@@ -108,6 +109,12 @@ crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
 mdrtr = FergusonBrannick2012$mod, annotate = TRUE,
 main_lab = 'Moderator Legend and Annotation')
+
+# Moderator legend position can be adjusted.
+crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
+mdrtr = FergusonBrannick2012$mod, mdrtr_lab_pos = c(0.8, 0.8),
+main_lab = 'Moderator Legend Position Change')
 
 # Dot size can be changed.
 crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
