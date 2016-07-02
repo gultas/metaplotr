@@ -37,3 +37,5 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 >>>>>>> f8e007aec08c8a46091bbe9f519656d6ace0bd8a
+packrat/src/
+inst/doc
