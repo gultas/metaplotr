@@ -40,11 +40,13 @@
 #'# Remove all variables in the .GlobalEnv, effectively clearing .GlobalEvn
 #'rm(list = ls())
 #'
+#'\dontrun{
 #'# Find out more about the data set from Ferguson and Brannick (2012)
 #'# help("FergusonBrannick2012")
 #'
 #'# You can check out help file of the \code{crosshairs} function.
 #'# help(crosshairs)
+#'}
 #'
 #'# Basic usage of the \code{crosshairs} function.
 #'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
@@ -57,17 +59,20 @@
 #'
 #'# confint option can control whiskers length.
 #'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
-#'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, confint = .95)
-#'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, confint = .7)
+#'
+#'\dontrun{
 #'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, confint = .2)
+#'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+#'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, confint = .95)
 #'
 #'# Main and axes labels can be changed.
 #'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
 #'main_lab = 'Different Main Label', x_lab = 'Different X Label',
 #'y_lab = 'Different Y Label')
+#'}
 #'
 #'# Annotated correlation and meand values can be added to the graph.
 #'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
