@@ -72,14 +72,12 @@
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
 #'main_lab = 'Different Main Label', x_lab = 'Different X Label',
 #'y_lab = 'Different Y Label')
-#'}
 #'
 #'# Annotated correlation and meand values can be added to the graph.
 #'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, annotate = TRUE,
 #'main_lab = 'Annotated Graph')
 #'
-#'\dontrun{
 #'# Boxplots can be hidden.
 #'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
