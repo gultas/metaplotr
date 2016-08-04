@@ -23,5 +23,6 @@ Imports:
     ggplot2,
     gridExtra
 Suggests: knitr,
-    rmarkdown
+    rmarkdown,
+    metafor
 VignetteBuilder: knitr
