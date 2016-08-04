@@ -59,6 +59,7 @@ When given effect sizes and standard errors, creates cross-hairs plots.
 plot of given dependent effect sizes.
 }
 \examples{
+\dontrun{
 # Load and attach metaplotr package to the Global Environment
 library(metaplotr)
 
@@ -70,23 +71,27 @@ rm(list = ls())
 
 # You can check out help file of the \\code{crosshairs} function.
 # help(crosshairs)
+}
 
 # Basic usage of the \\code{crosshairs} function.
 crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se)
 
+\dontrun{
 # whis_on option opens and closes whiskers.
 crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
 whis_on = FALSE)
+}
 
 # confint option can control whiskers length.
 crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
-FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, confint = .95)
-crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, confint = .7)
+
 crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, confint = .2)
+crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
+FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, confint = .95)
 
 # Main and axes labels can be changed.
 crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
@@ -104,6 +109,7 @@ crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
 main_lab = 'No Boxplots', bxplts = FALSE)
 
+\dontrun{
 # Moderator legend and annotations can be used simulaneously.
 crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
@@ -127,6 +133,7 @@ crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
 mdrtr = FergusonBrannick2012$mod, lab_size = 20,
 main_lab = 'Label Size Change')
+}
 
 }
 

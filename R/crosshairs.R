@@ -34,13 +34,13 @@
 #'@aliases cross-hairs
 #'
 #'@examples
+#'\dontrun{
 #'# Load and attach metaplotr package to the Global Environment
 #'library(metaplotr)
 #'
 #'# Remove all variables in the .GlobalEnv, effectively clearing .GlobalEvn
 #'rm(list = ls())
 #'
-#'\dontrun{
 #'# Find out more about the data set from Ferguson and Brannick (2012)
 #'# help("FergusonBrannick2012")
 #'
@@ -52,16 +52,17 @@
 #'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se)
 #'
+#'\dontrun{
 #'# whis_on option opens and closes whiskers.
 #'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
 #'whis_on = FALSE)
+#'}
 #'
 #'# confint option can control whiskers length.
 #'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, confint = .7)
 #'
-#'\dontrun{
 #'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, confint = .2)
 #'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
@@ -83,6 +84,7 @@
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
 #'main_lab = 'No Boxplots', bxplts = FALSE)
 #'
+#'\dontrun{
 #'# Moderator legend and annotations can be used simulaneously.
 #'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
@@ -107,6 +109,7 @@
 #'mdrtr = FergusonBrannick2012$mod, lab_size = 20,
 #'main_lab = 'Label Size Change')
 #'}
+#'
 #'@export
 crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
                        main_lab = NULL, confint = 0.95, mdrtr = NULL,
