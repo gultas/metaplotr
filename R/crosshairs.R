@@ -74,6 +74,7 @@
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se, annotate = TRUE,
 #'main_lab = 'Annotated Graph')
 #'
+#'\dontrun{
 #'# Boxplots can be hidden.
 #'crosshairs(FergusonBrannick2012$pub_z, FergusonBrannick2012$dis_z,
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
@@ -102,7 +103,7 @@
 #'FergusonBrannick2012$pub_z_se, FergusonBrannick2012$dis_z_se,
 #'mdrtr = FergusonBrannick2012$mod, lab_size = 20,
 #'main_lab = 'Label Size Change')
-#'
+#'}
 #'@export
 crosshairs <- function(x, y, xse, yse, x_lab = NULL, y_lab = NULL,
                        main_lab = NULL, confint = 0.95, mdrtr = NULL,

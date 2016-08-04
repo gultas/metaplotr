@@ -1,6 +1,6 @@
 Package: metaplotr
 Version: 0.0.3
-Date: 2016-07-01
+Date: 2016-08-04
 Title: Creates CrossHairs Plots for Meta-Analyses
 Authors@R: c(
     person("Mehmet", "Gultas", , "mehmetgultas@gmail.com", c("aut", "cre")),
